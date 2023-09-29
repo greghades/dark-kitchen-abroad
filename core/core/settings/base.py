@@ -37,6 +37,9 @@ DEFAULT_APPS = [
 
 LOCAL_APPS = [
     'aplications.authentication',
+    'aplications.produccion',
+    'aplications.logistica',
+    'aplications.venta',
 ]
 
 THIRD_APPS = [
