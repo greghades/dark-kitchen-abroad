@@ -16,7 +16,7 @@ class CustomUser(AbstractUser):
     email = models.EmailField(max_length=200, unique=True)
     password = models.CharField(max_length=150,null=False)
     rol = models.CharField(max_length=50,choices=USER_ROLES_CHOICES)
-    codigo = models.CharField(max_length=50,blank=False,null=False,unique=True)
+    codigo = models.CharField(max_length=50,unique=True)
     activo = models.BooleanField(default=False)
 
 
