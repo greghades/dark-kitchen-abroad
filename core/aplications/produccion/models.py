@@ -1,8 +1,8 @@
 from django.db import models
-
-produccionS_CHOICES = (
+from aplications.logistica.models import Almacen
+TIPO_CHOICES = (
     ('ingrediente', 'Ingrediente'),
-    ('platillo ', 'platillo '),
+    ('platillo', 'platillo'),
     ('insumo', 'insumo'),
 )
 
@@ -59,19 +59,22 @@ class Categoria(models.Model):
 # Create your models here.
 class Produto(models.Model):
     nombre = models.CharField(max_length=25,blank=False,null=False)
-    codigo = models.CharField(max_length=50,blank=False,null=False,unique=True)
-    unidad_medida_id = models.ForeignKey(Unidad_Medida, on_delete=models.CASCADE)
+    descripcion = models.TextField(max_length=50,blank=False,null=False,unique=True)
+    tipo = models.CharField(max_length=50,blank=False,null=False,choices=TIPO_CHOICES)
+    cantidad = models.IntegerField(blank=False,null=False,default=0)
     costo = models.FloatField(blank=False,null=False)
     ultimo_cost = models.FloatField(blank=False,null=False)
-    activo = models.BooleanField(default=False)
     precio = models.FloatField(blank=False,null=False)
-    descripcion = models.TextField(max_length=50,blank=False,null=False,unique=True)
-    categoria_id = models.ForeignKey(Categoria, on_delete=models.CASCADE)
-    tipo = models.CharField(max_length=50,blank=False,null=False,choices=produccionS_CHOICES)
+    activo = models.BooleanField(default=False)
+    fecha_expiracion = models.DateField(blank=True,null=True)
+    almacen_id = models.ForeignKey(Almacen,on_delete=models.CASCADE,default=None)
+    #categoria_id = models.ForeignKey(Categoria, on_delete=models.CASCADE)
+    unidad_medida_id = models.ForeignKey(Unidad_Medida, on_delete=models.CASCADE)
     proveedor_id = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
-    fecha_expiracion = models.DateField()
-    estado = models.CharField(max_length=50,blank=False,null=False,choices=ESTADOS_CALIDAD_CHOICES)
-    uso = models.CharField(max_length=50,blank=False,null=False,choices=USOS_produccionS_CHOICES)
+    
+    #estado = models.CharField(max_length=50,blank=False,null=False,choices=ESTADOS_CALIDAD_CHOICES)
+    #uso = models.CharField(max_length=50,blank=False,null=False,choices=USOS_produccionS_CHOICES)
+
 
     def __str__(self):
         return self.nombre + self.tipo

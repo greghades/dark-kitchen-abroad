@@ -4,7 +4,7 @@ from .base import *
 SECRET_KEY = 'django-insecure-$m+%&u8z+j)ok%kdizoa8vfd%rzxj%qu(i&5%6l2(@_m*=_*4h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
