@@ -9,9 +9,14 @@ class Unidad_MedidaSerializer(ModelSerializer):
         fields = ('nombre','simbolo')
 
 
-class ProductSerializer(ModelSerializer):
-    unidad_medida_id = Unidad_MedidaSerializer()  # Utiliza el serializer de Unidad_Medida
+class ProductSerializer(serializers.ModelSerializer):
+    unidad_medida_id = serializers.CharField(source='unidad_medida_id.nombre', read_only=True)
+    unidad_medida = serializers.PrimaryKeyRelatedField(
+        queryset=Unidad_Medida.objects.all(),
+        source='unidad_medida_id',
+        write_only=True
+    )
 
     class Meta:
         model = Produto
-        fields = ('id', 'nombre', 'descripcion', 'tipo', 'cantidad', 'costo', 'ultimo_cost', 'precio', 'activo', 'fecha_expiracion', 'almacen_id', 'unidad_medida_id', 'proveedor_id')
+        fields = ('id', 'nombre', 'descripcion', 'tipo', 'cantidad', 'costo', 'ultimo_cost', 'precio', 'activo', 'fecha_expiracion', 'almacen_id', 'unidad_medida_id', 'unidad_medida', 'proveedor_id')
