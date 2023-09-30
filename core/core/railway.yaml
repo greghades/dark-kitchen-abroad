@@ -1,0 +1,13 @@
+version: 2
+services:
+  - name: web
+    env:
+      - DJANGO_SECRET_KEY=your_secret_key
+      - DATABASE_URL=postgres://gregori:fender25@localhost:5432/abroad
+
+    build: .
+    command: python manage.py runserver 0.0.0.0:$PORT
+databases:
+  - name: postgres
+    env:
+      - POSTGRES_DB=abroad
