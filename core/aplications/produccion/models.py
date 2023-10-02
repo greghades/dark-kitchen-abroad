@@ -63,7 +63,7 @@ class Produto(models.Model):
     tipo = models.CharField(max_length=50,blank=False,null=False,choices=TIPO_CHOICES)
     cantidad = models.IntegerField(blank=False,null=False,default=0)
     costo = models.FloatField(blank=False,null=False)
-    ultimo_cost = models.FloatField(blank=False,null=False)
+    ultimo_cost = models.FloatField()
     precio = models.FloatField(blank=False,null=False)
     activo = models.BooleanField(default=False)
     fecha_expiracion = models.DateField(blank=True,null=True)
